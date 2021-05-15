@@ -11,13 +11,8 @@ import ChatInput from "./components/ChatInput/ChatInput.jsx";
 
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      //sending in the chatHistory prop
-      chatHistory: []
-    }
-  }
+ state = { chatHistory: []}
+  
 
   //call back function that will run automatically alerting the log wiht a new message
   componentDidMount() {
@@ -38,8 +33,10 @@ class App extends Component {
   }
 
   
-refreshPage(){
-    window.location.reload();
+clearHistory(){
+  //window.location.reload();
+this.setState({ chatHistory: [] });
+
 } 
 
   //Render function that calls to the screen all of our components: Header, ChatHistory and our button
@@ -51,7 +48,8 @@ refreshPage(){
         <iframe src="https://giphy.com/embed/rtRflhLVzbNWU" width="200" height="300" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/stickers/duck-enjoy-ease-rtRflhLVzbNWU"></a></p>
         <ChatHistory chatHistory={this.state.chatHistory} />
         <ChatInput send={this.send} />
-        <button className="clearButton" type="submit" onClick={this.refreshPage}> Clear Chat History </button>
+    
+        <button className="clearButton" type="submit" onClick={() =>this.clearHistory()} > Clear Chat History </button>
       </div>
     );
   }
