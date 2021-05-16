@@ -8,7 +8,7 @@ A project by: Akash Rana, Brianna Garland, & Dominic Zecchino
 | ------ | ------ |
 | Brianna Garland | [https://github.com/BriannaPGarland] |
 | Akash Rana | [https://github.com/akashrana290]|
-| Dominic Zecchino| [INSERT DOM"S GIT]|
+| Dominic Zecchino| [https://github.com/dzecchino]|
 
 
 ## Introduction
