@@ -1,4 +1,4 @@
-package websocket
+package websocket				//allows for browser-server communiction
 
 import (
 	"log"
