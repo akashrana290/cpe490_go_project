@@ -9,7 +9,7 @@ type Pool struct {
 	Broadcast  chan Message     // loops through clients and send a message  ~ actually sends the message
 }
 
-func NewPool() *Pool {
+func NewPool() *Pool {					//used for registering, unregistering, client mapping, and message broadcasting
 	return &Pool{
 		Register:   make(chan *Client),
 		Unregister: make(chan *Client),
@@ -21,22 +21,23 @@ func NewPool() *Pool {
 func (pool *Pool) Start() {
 	for {
 		select {
-		case client := <-pool.Register:
+		case client := <-pool.Register:		//defining a register case in the pool of clients
 			pool.Clients[client] = true
-			fmt.Println("Size of Connection Pool: ", len(pool.Clients))
-			for client, _ := range pool.Clients {
+			fmt.Println("Size of Connection Pool: ", len(pool.Clients))	//printing the number of clients
+			for client, _ := range pool.Clients {		//simple for loop within range of the number of clients
 				fmt.Println(client)
+				//when a new user is added, the below message is updated to the chat window
 				client.Conn.WriteJSON(Message{Type: 1, Body: "New User Joined..."})
 			}
 			break
-		case client := <-pool.Unregister:
-			delete(pool.Clients, client)
-			fmt.Println("Size of Connection Pool: ", len(pool.Clients))
+		case client := <-pool.Unregister:	//defining an unregister case in the pool of clients 
+			delete(pool.Clients, client)	//function to delete a user from the pool
+			fmt.Println("Size of Connection Pool: ", len(pool.Clients))	//printing the reducted number of clients
 			for client, _ := range pool.Clients {
-				client.Conn.WriteJSON(Message{Type: 1, Body: "User Disconnected..."})
+				client.Conn.WriteJSON(Message{Type: 1, Body: "User Disconnected..."})	//below message is updated to the chat window
 			}
 			break
-		case message := <-pool.Broadcast:
+		case message := <-pool.Broadcast:	//defining a broadcast case in the pool of clients
 			fmt.Println("Sending message to all clients in Pool")
 			for client, _ := range pool.Clients {
 				if err := client.Conn.WriteJSON(message); err != nil {
