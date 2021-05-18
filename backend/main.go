@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"		//fmt import formats I/O with functions for printing and reading
-	"net/http"	//thi import is for request-response handling for a web application
+	"net/http"	//this import is for request-response handling for a web application
 
 	"github.com/TutorialEdge/realtime-chat-go-react/pkg/websocket"
 )
@@ -12,7 +12,7 @@ func serveWs(pool *websocket.Pool, w http.ResponseWriter, r *http.Request) {
 	fmt.Println("WebSocket Endpoint Hit")
 	conn, err := websocket.Upgrade(w, r)
 	if err != nil {
-		fmt.Fprintf(w, "%+v\n", err)	//shows a resuling error in endpoint connection
+		fmt.Fprintf(w, "%+v\n", err)	//shows a resulting error in endpoint connection
 	}
 
 	client := &websocket.Client{
